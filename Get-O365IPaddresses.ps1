@@ -11,9 +11,9 @@ param
 )
 	$O365IPAddresses = [xml](Invoke-WebRequest -UseBasicParsing -Uri 'https://support.content.office.net/en-us/static/O365IPAddresses.xml')
 	$Updated = ([datetime]$O365IPAddresses.products.updated)
-	$O365IPAddresses.products.product | % {if($Product.Count -ge 1 -and $Product -eq $_.name) {$_} elseif(!($Product.Count -ge 1)) {$_}} | % {
+	$O365IPAddresses.products.product | % {if($Product.Count -ge 1 -and $Product -eq $_.name) {$_} elseif($Product.Count -lt 1) {$_}} | % {
 		$xmlProduct = $_.name
-		$_.addresslist | % {if($AddressType.Count -ge 1 -and $AddressType -eq $_.type) {$_} elseif(!($AddressType.Count -ge 1)) {$_}} | % {
+		$_.addresslist | % {if($AddressType.Count -ge 1 -and $AddressType -eq $_.type) {$_} elseif($AddressType.Count -lt 1) {$_}} | % {
 			$xmlAdressType = $_.type
 			$_.address | % {
 				[PSCustomObject]@{
