@@ -1,4 +1,18 @@
 function Get-O365IPAddresses {
+<#
+.SYNOPSIS
+	Downloads the Office 365 IP addresses from Microsoft and returns them as PowerShell objects.
+.PARAMETER Product
+	The product(s) for which you want IP addresses for. Naming is based on the naming in the XML file.
+.PARAMETER AddressType
+	The type of address (IPv4, IPv6 or URL) required.
+.EXAMPLE
+	Get-O365IPAddresses
+.EXAMPLE
+	Get-O365IPAddresses -Product 'O365','EOP' -AddressType 'IPV4'
+.NOTES
+	Author:	Gavin Morrison (gavin <at> gavin.pro)
+#>
 [CmdletBinding()]
 param
 (
