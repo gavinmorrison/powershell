@@ -5,12 +5,20 @@ function Resolve-GoogleDnsName {
 .DESCRIPTION
 	Google's DNS-over-HTTPS API allows DNS queries to be made using HTTPS. This is useful in environments where direct 
 	DNS lookups are not possible. The parameters are similar to the 'Resolve-DnsName' cmdlet, but the output is not.
-.PARAMETER AddressType
-	The type of address (IPv4, IPv6 or URL) required.
+.PARAMETER Name
+	The name to resolve.
+.PARAMETER Type
+	The RR type to resolve as a string (defaults to 'A').
+.PARAMETER DisableDNSSECValidation
+	Disables DNSSEC validation.
+.PARAMETER IncludePadding
+	Sends pseduo-random data with the request in order to obfuscate the request. 
 .EXAMPLE
-	Get-O365IPAddresses
+	Resolve-GoogleDnsName -Name 'example.com'
 .EXAMPLE
-	Get-O365IPAddresses -Product 'O365','EOP' -AddressType 'IPV4'
+	Resolve-GoogleDnsName -Name 'example.com' -Type 'MX'
+.EXAMPLE
+	Resolve-GoogleDnsName -Name 'example.com' -Type 'MX' -DisableDNSSECValidation -IncludePadding
 .NOTES
 	Author: Gavin Morrison (gavin <at> gavin.pro)
 	API: https://developers.google.com/speed/public-dns/docs/dns-over-https
