@@ -59,7 +59,6 @@ function Resolve-GoogleDnsName {
 			$PaddingString = $PaddingString + (([GUID]::NewGuid()).ToString()).Replace('-','')
 			$RequestUri = $RequestUri + '&random_padding=' + $PaddingString
 		}
-		Write-Output $PaddingString
 	}
 	(Invoke-RestMethod -Method GET -Uri $RequestURI).Answer
 }
