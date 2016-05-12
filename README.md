@@ -1,4 +1,4 @@
-# powershell-utilities
+# Gavin's PowerShell Repo
 A selection of assorted PowerShell utilities that are too small for a repo of their own.
 
 **CAUTION:** Some of these are quick and dirty functions written for a specific purpose, use them at your own risk. 
