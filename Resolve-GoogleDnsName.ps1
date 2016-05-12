@@ -56,8 +56,8 @@ function Resolve-GoogleDnsName {
 		$PaddingString = ''
 		foreach($i in (1..(Get-Random -Minimum 10 -Maximum 100)))
 		{
-			# generates a pseduo-random string to help mask the traffic
 			$PaddingString = $PaddingString + (([GUID]::NewGuid()).ToString()).Replace('-','')
+			$RequestUri = $RequestUri + '&random_padding=' + $PaddingString
 		}
 		Write-Output $PaddingString
 	}
