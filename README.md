@@ -4,7 +4,7 @@ A selection of assorted PowerShell utilities that are too small for a repo of th
 **CAUTION:** Some of these are quick and dirty functions written for a specific purpose, use them at your own risk. 
 
 ## ConvertFrom-CidrNotation
-A simple function that converts strings written in CIDR notation (e.g. 127.0.0.1/8) to an object with the address and subnet mask.
+Converts strings written in CIDR notation (e.g. 127.0.0.1/8) to an object with the address and subnet mask.
 
 ## Get-DMARCReport
 Parses the output of a DMARC report and returns a PowerShell object.
