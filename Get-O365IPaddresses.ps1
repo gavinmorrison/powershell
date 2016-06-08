@@ -12,18 +12,32 @@ function Get-O365IPAddresses {
 	Get-O365IPAddresses -Product 'O365','EOP' -AddressType 'IPV4'
 .NOTES
 	Author:	Gavin Morrison (gavin <at> gavin.pro)
+	Version: 0.3
+
+	0.1		11/03/2016	Initial version.
+	0.2		13/03/2016	Added comment based help.
+	0.3		08/06/2016	Added ability to use local XML file and updated product validation.
 #>
 [CmdletBinding()]
 param
 (
-	[ValidateSet('o365','LYO','ProPlus','SPO','WAC','EX-Fed','OfficeiPad','OfficeMobile','Yammer','RCA','EOP')]
+	[ValidateSet('o365','LYO','Planner','ProPlus','OneNote','WAC','Yammer','EXO','identity','SPO','RCA','Sway','Office365Video','OfficeMobile','CRLs','OfficeiPad','EOP')]
 	[String[]]
 	$Product,
 	[ValidateSet('IPV4','IPV6','URL')]
 	[String[]]
-	$AddressType
+	$AddressType,
+	[String]
+	$LocalPath
 )
-	$O365IPAddresses = [xml](Invoke-WebRequest -UseBasicParsing -Uri 'https://support.content.office.net/en-us/static/O365IPAddresses.xml')
+	if($LocalPath)
+	{
+		$O365IPAddresses = [xml](Get-Content -Path $LocalPath)	
+	}
+	else
+	{
+	    $O365IPAddresses = [xml](Invoke-WebRequest -UseBasicParsing -Uri 'https://support.content.office.net/en-us/static/O365IPAddresses.xml')	
+	}
 	$Updated = ([datetime]$O365IPAddresses.products.updated)
 	$O365IPAddresses.products.product | % {if($Product.Count -ge 1 -and $Product -eq $_.name) {$_} elseif($Product.Count -lt 1) {$_}} | % {
 		$xmlProduct = $_.name
