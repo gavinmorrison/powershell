@@ -1,4 +1,14 @@
 function Get-LyncVersion {
+<#
+.SYNOPSIS
+	Attempts to discover what version of Lync / Skype for Business is being used for a given SIP domain.
+.PARAMETER Domain
+	The SIP domain to perform tests against.
+.EXAMPLE
+	Get-LyncVersion -Domain 'gavin.pro'
+.NOTES
+	Author: Gavin Morrison (gavin <at> gavin.pro)
+#>
     [CmdletBinding()]
     param
     (
