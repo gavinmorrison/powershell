@@ -36,7 +36,7 @@ param
 	}
 	else
 	{
-	    $O365IPAddresses = [xml](Invoke-WebRequest -UseBasicParsing -Uri 'https://support.content.office.net/en-us/static/O365IPAddresses.xml')	
+		$O365IPAddresses = [xml](Invoke-WebRequest -UseBasicParsing -Uri 'https://support.content.office.net/en-us/static/O365IPAddresses.xml')	
 	}
 	$Updated = ([datetime]$O365IPAddresses.products.updated)
 	$O365IPAddresses.products.product | % {if($Product.Count -ge 1 -and $Product -eq $_.name) {$_} elseif($Product.Count -lt 1) {$_}} | % {
