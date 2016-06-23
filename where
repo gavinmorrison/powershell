@@ -1,0 +1,13 @@
+Where do those DNS requests come from?
+
+I was recently asked by a customer where Microsoft make their DNS requests from. This may seem like an unusual question, but they were deployng GEO load balancers for AD FS, and wanted to know where they should expect to see traffic originating from. 
+
+Microsoft don't (currently) publish a list of these servers / networks, which makes sense, as DNS resolvers are normally entirely public or entirely private. However, the customer has a security requirement to restrict access wherever possible, so I duly investigated. The process I followed was roughly as below:
+
+* Spin up an Ubuntu virtual machine
+* Configure BIND
+* Enable query logging
+* Create a DNS zone in Public DNS, and delegate it to my new DNS server
+* Get Microsoft to make a DNS lookup against the new DNS zone. I did this by trying to add a migration endpoint in Exchange Online, using the dummy zone as the target.
+
+The results were quite interesting...
