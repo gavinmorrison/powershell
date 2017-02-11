@@ -23,15 +23,11 @@ function Get-LyncVersion {
     {
         $lyncdiscoverWebRequest = Invoke-WebRequest -Uri "https://lyncdiscover.$($Domain)" -ErrorAction 'Stop'
     }
-    catch [System.Net.WebException]
+    catch
     {
         Write-Warning "Failed to make HTTPS request: $_"
     }
-    catch
-    {
-        Write-Error $_
-        break    
-    }
+
     if(!$lyncdiscoverWebRequest)
     {
         try
