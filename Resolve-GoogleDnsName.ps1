@@ -53,12 +53,15 @@ function Resolve-GoogleDnsName {
 	}
 	if($IncludePadding)
 	{
+		<#
 		$PaddingString = ''
 		foreach($i in (1..(Get-Random -Minimum 1 -Maximum 10)))
 		{
 			$PaddingString = $PaddingString + (([GUID]::NewGuid()).ToString()).Replace('-','')
 			$RequestUri = $RequestUri + '&random_padding=' + $PaddingString
 		}
+		#>
 	}
-	(Invoke-RestMethod -Method GET -Uri $RequestURI).Answer
+	#Write-Output $RequestUri
+	return (Invoke-RestMethod -Method GET -Uri $RequestURI).Answer
 }
